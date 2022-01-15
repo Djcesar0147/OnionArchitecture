@@ -1,13 +1,37 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Application.Interfaces;
+using Domain.Common;
+using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.Context
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        private readonly IDateTimeService _dateTime;
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IDateTimeService dateTime) : base(options)
         {
             //Probar el control de rastreador de cambios durante saveChanges()
             //ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            _dateTime = dateTime;
+        }
+
+        public DbSet<Persona> Persona { get; set; }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        {
+            foreach (var entry in ChangeTracker.Entries<AuditableBaseEntity>())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        entry.Entity.FechaCaptura = _dateTime.NowUtc;
+                        break;
+                    case EntityState.Modified: 
+                        entry.Entity.FechaModificacion = _dateTime.NowUtc;
+                        break;
+                }
+            }
+            return base.SaveChangesAsync(cancellationToken);
         }
     }
 }
