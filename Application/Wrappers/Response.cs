@@ -6,11 +6,13 @@
         {
 
         }
-        public Response(T data, string message = null)
+        public Response(T data, int id, long bId, string message = null)
         {
             Result = true;
             Mensaje = message;
             Datos = data;
+            Identificador = id;
+            BIdentificador = bId;
         }
 
         public Response(string message, T data, List<string> lstErrores, int ejec = -1)
