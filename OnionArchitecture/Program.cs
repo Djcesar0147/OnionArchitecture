@@ -1,4 +1,5 @@
 using Application;
+using OnionArchitecture.Extensions;
 using Persistence;
 using Shared;
 
@@ -29,6 +30,8 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
+//Rerencia a ./Middlewares
+app.UseErrorHandlingMiddleware();
 
 
 app.Run();
