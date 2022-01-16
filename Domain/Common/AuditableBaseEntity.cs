@@ -3,7 +3,7 @@
     public class AuditableBaseEntity
     {
         [MaxLength(200)]
-        public string CreadoPor { get; set; }
+        public string? CreadoPor { get; set; }
 
         public DateTime FechaCaptura { get; set; }
 
