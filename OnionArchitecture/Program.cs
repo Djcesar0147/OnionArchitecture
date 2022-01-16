@@ -1,4 +1,6 @@
 using Application;
+using Application.Feautres.Persona.Commands.CreatePersonaCommand;
+using MediatR;
 using OnionArchitecture.Extensions;
 using Persistence;
 using Shared;
@@ -32,6 +34,15 @@ app.UseHttpsRedirection();
 
 //Rerencia a ./Middlewares
 app.UseErrorHandlingMiddleware();
+
+
+
+
+app.MapPost("Persona", async (HttpContext httpContext, IMediator mediator, LinkGenerator links, CreatePersonaCommand command) =>
+{
+    var result = await mediator.Send(command);
+    return result;
+});
 
 
 app.Run();
