@@ -1,5 +1,6 @@
 using Application;
 using Persistence;
+using Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,9 @@ builder.Services.AddApplicationLayer();
 
 //Refrenciamos servicios matriculados en Persistence
 builder.Services.AddPersistenceInfraestructure(builder.Configuration);
+
+//Refrenciamos servicios matriculados en Shared
+builder.Services.AddSharedInfraestructure(builder.Configuration);
 
 var app = builder.Build();
 
