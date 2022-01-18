@@ -16,8 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\" />
-    <Folder Include="Feautres\Persona\Queries\" />
+    <Folder Include="Feautres\Persona\Queries\GetAllPersonas\" />
     <Folder Include="Filters\" />
   </ItemGroup>
 

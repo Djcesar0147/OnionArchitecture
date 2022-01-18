@@ -2,6 +2,7 @@ using Application;
 using Application.Feautres.Persona.Commands.CreatePersonaCommand;
 using Application.Feautres.Persona.Commands.DeletePersonaCommand;
 using Application.Feautres.Persona.Commands.UpdatePersonaCommand;
+using Application.Feautres.Persona.Queries.GetPersonaById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OnionArchitecture.Extensions;
@@ -40,6 +41,11 @@ app.UseErrorHandlingMiddleware();
 
 
 
+app.MapGet("Persona/{personaId}", async (int personaId, HttpContext httpContext, IMediator mediator, LinkGenerator links) =>
+{
+    var result = await mediator.Send(new GetPersonaByIdQuery { personaId = personaId });
+    return result;
+});
 
 app.MapPost("Persona", async (HttpContext httpContext, IMediator mediator, LinkGenerator links, CreatePersonaCommand command) =>
 {
