@@ -16,7 +16,7 @@ namespace Application.Feautres.Persona.Commands.CreatePersonaCommand
             RuleFor(x => x.persona_AMaterno).Length(0, 10);
             //RuleFor(x => x.Email).EmailAddress();
           //  RuleFor(x => x.Age).InclusiveBetween(18, 60);
-            RuleFor(x => x.persona_Nombres).NotEmpty().WithMessage("{PropertyName.Trim()} no puede ser vacío")
+            RuleFor(x => x.persona_Nombres).NotEmpty().WithMessage("{PropertyName} no puede ser vacío")
                                          .MaximumLength(200).WithMessage("{PropertyName} no debe exceder de {MaxLength} caracteres");
         }
     }

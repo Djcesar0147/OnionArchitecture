@@ -1,4 +1,5 @@
 ﻿using Application.Feautres.Persona.Commands.CreatePersonaCommand;
+using Application.Feautres.Persona.Commands.UpdatePersonaCommand;
 using Domain.Entities;
 
 namespace Application.Mappings

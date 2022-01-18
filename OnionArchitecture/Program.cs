@@ -1,6 +1,9 @@
 using Application;
 using Application.Feautres.Persona.Commands.CreatePersonaCommand;
+using Application.Feautres.Persona.Commands.DeletePersonaCommand;
+using Application.Feautres.Persona.Commands.UpdatePersonaCommand;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using OnionArchitecture.Extensions;
 using Persistence;
 using Shared;
@@ -41,6 +44,18 @@ app.UseErrorHandlingMiddleware();
 app.MapPost("Persona", async (HttpContext httpContext, IMediator mediator, LinkGenerator links, CreatePersonaCommand command) =>
 {
     var result = await mediator.Send(command);
+    return result;
+});
+
+app.MapPut("Persona", async (HttpContext httpContext, IMediator mediator, LinkGenerator links, UpdatePersonaCommand command) =>
+{
+    var result = await mediator.Send(command);
+    return result;
+});
+
+app.MapDelete("Persona/{personaId}", async (int personaId, HttpContext httpContext, IMediator mediator, LinkGenerator links) =>
+{
+    var result = await mediator.Send(new DeletePersonaCommand { persona_Id = personaId});
     return result;
 });
 
